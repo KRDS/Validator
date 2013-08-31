@@ -1,0 +1,7 @@
+{
+    "name": "krds/validator",
+    "description": "KRDS Form Validator",
+    "autoload": {
+    	"files": ["bootstrap.php"]
+    }
+}
