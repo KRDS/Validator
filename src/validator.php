@@ -264,7 +264,7 @@ class Validator
 
 		return isset($this->_values[$field])
 				&& $this->_values[$field] !== null
-				&& ( ! $this->_hasField($field) || ($this->_hasField($field) && ! $this->_getField($field)->hasError()));
+				&& ( ! $this->_hasField($field) || ($this->_hasField($field) && ! $this->getField($field)->hasError()));
 	}
 
 	/**
@@ -323,6 +323,18 @@ class Validator
 	}
 
 	/**
+	 * Return a field.
+	 * Contrary to `field` method, it does not set it as the current field.
+	 *
+	 * @param string $name Field name
+	 * @return \Validator\Field
+	 */
+	public function getField($name)
+	{
+		return $this->_fields[$name];
+	}
+
+	/**
 	 * Close and disable all the remaining global rules.
 	 *
 	 * @return \Validator
@@ -346,16 +358,5 @@ class Validator
 	protected function _hasField($name)
 	{
 		return isset($this->_fields[$name]);
-	}
-
-	/**
-	 * Return a field.
-	 *
-	 * @param string $name Field name
-	 * @return \Validator\Field
-	 */
-	protected function _getField($name)
-	{
-		return $this->_fields[$name];
 	}
 }
