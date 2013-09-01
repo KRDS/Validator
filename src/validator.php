@@ -162,7 +162,7 @@ class Validator
 	public function error($message)
 	{
 		if( ! $this->_current_field)
-			throw new Exception('Please declare a field before calling error, or use `globalError`', E_ERROR);
+			throw new Exception('Please declare a field before calling error, or use `globalError`');
 
 		$this->_fields[$this->_current_field]->error($message, true, true); // Force the error to be shown
 
@@ -206,7 +206,7 @@ class Validator
 		$this->_values	=	$values;
 
 		if( ! $this->_fields)
-			throw new Exception('You must declare fields rules in the constructor before calling `run` function');
+			throw new Exception('You must declare validation rules before calling `run`');
 
 		$this->_has_error	=	false;
 
@@ -249,7 +249,7 @@ class Validator
 	public function ok($field)
 	{
 		if( ! $this->_has_run)
-			throw new Exception('Validation must be run with `run` function before calling ok');
+			throw new Exception('Validation must be run with function before calling `ok`');
 
 		return isset($this->_values[$field])
 				&& $this->_values[$field] !== null
@@ -264,7 +264,7 @@ class Validator
 	public function getValues()
 	{
 		if( ! $this->_has_run)
-			throw new Exception('Validation must be run with `run` function before calling getValues');
+			throw new Exception('Validation must be run with function before calling `getValues`');
 
 		return $this->_fields;
 	}
@@ -276,9 +276,6 @@ class Validator
 	 */
 	public function hasError()
 	{
-		if( ! $this->_has_run)
-			throw new Exception('Validation must be run with `run` function before calling hasError');
-
 		return $this->_has_error;
 	}
 
@@ -290,9 +287,6 @@ class Validator
 	 */
 	public function getErrors($displayable = false)
 	{
-		if( ! $this->_has_run)
-			throw new Exception('Validation must be run with `run` function before calling getErrors');
-
 		$ret	=	[ ];
 
 		foreach($this->_fields as $name => $field)
