@@ -264,7 +264,7 @@ class Validator
 
 		return isset($this->_values[$field])
 				&& $this->_values[$field] !== null
-				&& ( ! $this->_hasField($field) || ($this->_hasField($field) && ! $this->getField($field)->hasError()));
+				&& ( ! $this->_hasField($field) || ($this->_hasField($field) && ! $this->_getField($field)->hasError()));
 	}
 
 	/**
@@ -337,7 +337,6 @@ class Validator
 		$this->_temp_or		=	[ ];
 	}
 
-
 	/**
 	 * Checks if a field has been declared when instantiating the function.
 	 *
@@ -347,5 +346,16 @@ class Validator
 	protected function _hasField($name)
 	{
 		return isset($this->_fields[$name]);
+	}
+
+	/**
+	 * Return a field.
+	 *
+	 * @param string $name Field name
+	 * @return \Validator\Field
+	 */
+	protected function _getField($name)
+	{
+		return $this->_fields[$name];
 	}
 }
