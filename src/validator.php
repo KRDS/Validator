@@ -56,7 +56,6 @@ class Validator
 	 * Forward function calls to the current \Validator\Field object.
 	 *
 	 * @method $this rule(mixed $rule) Add a rule to the field
-	 * @method $this ruleBefore(mixed $rule) Add a rule to the field at the top of the validation stack
 	 * @method $this rules(array $rules) Add multiple rules to the field
 	 * @method $this getError() Return the error as a `\Validator\FieldError` object
 	 */

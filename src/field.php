@@ -40,16 +40,6 @@ class Field
 	}
 
 	/**
-	 * Add a validation rule at the top of the validation stack.
-	 *
-	 * @param mixed $rule Validation rule
-	 */
-	public function ruleBefore($rule)
-	{
-		array_unshift($this->_rules, $rule);
-	}
-
-	/**
 	 * Add multiple validation rules.
 	 *
 	 * @param array $rules Array of validation rules

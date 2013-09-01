@@ -83,18 +83,12 @@ First, choose the field you want to apply the rules on:
 $validator->field('field_name');
 ```
 
-  * Then, add one or more rules:
+Then, add one or more rules:
 
-  ```php
-  $validator->rule(new \Validation\Required);
-              ->rule(new \Validation\Email);
-  ```
-
-  * Or prepend them (will be pushed at the top of the validation stack):
-
-    ```php
-    $validator->ruleBefore(new \Validation\Required);
-    ```
+```php
+$validator->rule(new \Validation\Required);
+          ->rule(new \Validation\Email);
+```
 
 
 #### For multiple fields
