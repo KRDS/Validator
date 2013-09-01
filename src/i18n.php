@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Language provider for validation rules.
+ */
+
 namespace Validator;
 
 class i18n
@@ -7,6 +11,13 @@ class i18n
 	protected static $_language	=	'en';
 	protected static $_labels	=	[ ];
 
+	/**
+	 * Return a localized label.
+	 *
+	 * @param type $label Label name
+	 * @param array $params Paramaters to be replaced in the label (Hello %firstname: param = 'firstname')
+	 * @return string
+	 */
 	public static function get($label, array $params = null)
 	{
 		$labels	=	self::_getLabels(self::$_language);
@@ -25,11 +36,22 @@ class i18n
 		return $label;
 	}
 
+	/**
+	 * Set the language for validation rules messages.
+	 *
+	 * @param string $language
+	 */
 	public static function setLanguage($language)
 	{
 		self::$_language	=	$language;
 	}
 
+	/**
+	 * Load and return the labels for a language.
+	 *
+	 * @param string $language
+	 * @return array
+	 */
 	protected static function _getLabels($language)
 	{
 		if( ! isset(self::$_labels[$language]))
