@@ -15,6 +15,6 @@ class Boolean extends \Validator\Validation_Abstract
 	public function check($value)
 	{
 		if( ! in_array($value, self::$_boolean_values, true))
-			throw new \Exception(\Validator\i18n::get('error_validation_boolean'));
+			throw new \Exception(\Validator\i18n::get('error_boolean'));
 	}
 }

@@ -15,6 +15,6 @@ class Digits extends \Validator\Validation_Abstract
 						|| is_int($value);
 
 		if( ! $is_digits)
-			throw new \Exception(\Validator\i18n::get('error_validation_digits'));
+			throw new \Exception(\Validator\i18n::get('error_digits'));
 	}
 }

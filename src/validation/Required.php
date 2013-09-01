@@ -18,6 +18,6 @@ class Required extends \Validator\Validation_Abstract
 		 */
 
 		if($value === null)
-			throw new \Exception(\Validator\i18n::get('error_validation_required'));
+			throw new \Exception(\Validator\i18n::get('error_required'));
 	}
 }

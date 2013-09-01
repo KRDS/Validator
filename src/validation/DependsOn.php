@@ -40,13 +40,13 @@ class DependsOn extends \Validator\Validation_Abstract
 
 		if($is_empty)
 		{
-			throw new \Exception(\Validator\i18n::get('error_validation_depends_on_empty', [
+			throw new \Exception(\Validator\i18n::get('error_depends_on_empty', [
 				'field' => $this->_field,
 			]));
 		}
 		else if($validator->getField($this->_field)->hasError())
 		{
-			throw new \Exception(\Validator\i18n::get('error_validation_depends_on_check', [
+			throw new \Exception(\Validator\i18n::get('error_depends_on_check', [
 				'field' => $this->_field,
 			]));
 		}

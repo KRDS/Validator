@@ -32,13 +32,13 @@ class LowerThan extends \Validator\Validation_Abstract
 	{
 		if($this->_type === self::TYPE_NUMBER && $value > $this->_max)
 		{
-			throw new \Exception(\Validator\i18n::get('error_validation_lower_than', [
+			throw new \Exception(\Validator\i18n::get('error_lower_than', [
 				'max' => $this->_max,
 			]));
 		}
 		else if($this->_type === self::TYPE_DATE && strtotime($value) > $this->_max)
 		{
-			throw new \Exception(\Validator\i18n::get('error_validation_lower_than_date', [
+			throw new \Exception(\Validator\i18n::get('error_lower_than_date', [
 				'date' => date('Y-m-d', $this->_max),
 			]));
 		}

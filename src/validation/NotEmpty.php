@@ -13,6 +13,6 @@ class NotEmpty extends \Validator\Validation_Abstract
 	public function check($value)
 	{
 		if($value === null || $value === '')
-			throw new \Exception(\Validator\i18n::get('error_validation_not_empty'));
+			throw new \Exception(\Validator\i18n::get('error_not_empty'));
 	}
 }
