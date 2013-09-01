@@ -80,7 +80,7 @@ class Validator
 
 	/**
 	 * Declare a global rule to be applied to multiple field.
-	 * A global rule is disabled with `breakRule` and `breakRules` functions.
+	 * A global rule is disabled with `breakRule` and `breakAllRules` functions.
 	 *
 	 *   - An 'and' rule is applied to each field added after declaring it.
 	 *
@@ -142,7 +142,7 @@ class Validator
 	 *
 	 * @return \Validator
 	 */
-	public function breakRules()
+	public function breakAllRules()
 	{
 		// Merge temporary 'or' rules
 		if($this->_temp_or)
@@ -210,6 +210,8 @@ class Validator
 			throw new Exception('You must declare validation rules before calling `run`');
 
 		$this->_has_error	=	false;
+
+		$this->breakAllRules();
 
 		// First, run all 'or' validation rules
 		foreach($this->_or as $or)
