@@ -29,8 +29,8 @@ class Validation_LowerThan extends Validation_Abstract
 	public function check($value)
 	{
 		if($this->_type === self::TYPE_NUMBER && $value > $this->_max)
-			throw new Exception(Lib::i18n()->error_validation_lower_than($this->_max));
+			throw new Exception(\Validator\i18n::get('error_validation_lower_than', $this->_max));
 		else if($this->_type === self::TYPE_DATE && strtotime($value) > $this->_max)
-			throw new Exception(Lib::i18n()->error_validation_lower_than_date(Library_Utils::formatDate($this->_max)));
+			throw new Exception(\Validator\i18n::get('error_validation_lower_than_date', Library_Utils::formatDate($this->_max)));
 	}
 }

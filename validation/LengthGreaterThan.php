@@ -18,6 +18,6 @@ class Validation_LengthGreaterThan  extends Validation_Abstract
 	public function check($value)
 	{		
 		if(mb_strlen($value, 'UTF-8') <= $this->_length)
-			throw new Exception(Lib::i18n()->error_validation_length_greater_than($this->_length));
+			throw new Exception(\Validator\i18n::get('error_validation_length_greater_than', $this->_length));
 	}
 }

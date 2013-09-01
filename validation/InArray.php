@@ -23,6 +23,6 @@ class Validation_InArray extends Validation_Abstract
 			$value	=	strtolower($value);
 
 		if( ! in_array($value, $this->_list))
-			throw new Exception(Lib::i18n()->error_validation_in_array);
+			throw new Exception(\Validator\i18n::get('error_validation_in_array'));
 	}
 }

@@ -106,7 +106,7 @@ class Field
 
 							case self::RULE_PHP:
 								if( ! call_user_func($rule, $value))
-									throw new \Exception(\Validator\Locale::get('error_validation_generic'));
+									throw new \Exception(\Validator\i18n::get('error_validation_generic'));
 							break;
 						}
 

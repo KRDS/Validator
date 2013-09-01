@@ -16,6 +16,6 @@ class Validation_Required extends Validation_Abstract
 		 */
 
 		if($value === null)
-			throw new Exception(Lib::i18n()->error_validation_required);
+			throw new Exception(\Validator\i18n::get('error_validation_required'));
 	}
 }

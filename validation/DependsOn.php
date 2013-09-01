@@ -39,8 +39,8 @@ class Validation_DependsOn extends Validation_Abstract
 		}
 
 		if($is_empty)
-			throw new Exception(Lib::i18n()->error_validation_depends_on_empty($this->_field));
+			throw new Exception(\Validator\i18n::get('error_validation_depends_on_empty', $this->_field));
 		else if($validator->getField($this->_field)->hasError())
-			throw new Exception(Lib::i18n()->error_validation_depends_on_check($this->_field));
+			throw new Exception(\Validator\i18n::get('error_validation_depends_on_check', $this->_field));
 	}
 }

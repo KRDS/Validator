@@ -11,6 +11,6 @@ class Validation_Date extends Validation_Abstract
 		$pattern	=	'#^(?P<year>(?:19|20)\d{2})-(?P<month>[0]\d|[1][0-2])-(?P<day>[0-2]\d|[3][0-1])';
 
 		if( ! preg_match($pattern, $value, $parts) || ! checkdate($parts['month'], $parts['day'], $parts['year']))
-			throw new Exception(Lib::i18n()->error_validation_date);
+			throw new Exception(\Validator\i18n::get('error_validation_date'));
 	}
 }

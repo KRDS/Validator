@@ -19,6 +19,6 @@ class Validation_Float extends Validation_Abstract
 						|| preg_match(self::PATTERN_FLOAT, $value);
 
 		if( ! $is_float)
-			throw new Exception(Lib::i18n()->error_validation_float);
+			throw new Exception(\Validator\i18n::get('error_validation_float'));
 	}
 }

@@ -11,6 +11,6 @@ class Validation_NotEmpty extends Validation_Abstract
 	public function check($value)
 	{
 		if($value === null || $value === '')
-			throw new Exception(Lib::i18n()->error_validation_not_empty);
+			throw new Exception(\Validator\i18n::get('error_validation_not_empty'));
 	}
 }
