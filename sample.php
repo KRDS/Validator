@@ -26,6 +26,8 @@ class User
 // Run the validation
 //--------------------------------------------------------->
 
+\Validator\i18n::setLanguage('en'); // Not required as english is the default language
+
 $validator	=	new Validator;
 
 $validator->ruleuntilbreak(new \Validation\Required())
