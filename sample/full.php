@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This sample file showcases all the features of Validator.
+ */
+
 require_once __DIR__.'/../bootstrap.php';
 
 // Set up the environment
