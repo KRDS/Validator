@@ -60,17 +60,15 @@ Brought to you by the fine folks at [KRDS](http://www.krds.com/).
 
 ## Validating a form
 
-To validate a form, you’ll have define its validation rules first, then run the validation.
+To validate a form, you’ll have define its validation rules first then run the validation.
 
-First, instantiate a `Validator` object:
+Start by instantiating a `Validator` object:
 
 ```php
 $validator = new Validator;
 ```
 
 The methods below can be chained to `$validator`.
-
-To set the locale of error messages:
 
 ### Setting validation rules
 
