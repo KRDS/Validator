@@ -9,33 +9,30 @@ Brought to you by the fine folks at [KRDS](http://www.krds.com/).
 ##### Table of contents
 
   * [Validating a form](#validating-a-form)
-  
+
     * [Setting validation rules](#setting-validation-rules)
-    
+
       * [For a single field](#for-a-single-field)
       * [For multiple fields](#for-multiple-fields)
-    
         * ['and' rule](#and-rule)
         * ['or' rule](#or-rule)
-        * [Break](#break)
-    
+        * [Break](#break)<br><br>
     * [Running the validation](#running-the-validation)
     * [Pushing errors manually](#pushing-errors-manually)
     * [Full example](#full-example)
-    
+
   * [Localization](#localization)
-    
+
   * [Field related functions](#field-related-functions)
-  
+
     * [Getting the error](#getting-the-error)
     * [Pushing an error manually](#pushing-an-error-manually)
     * [Clearing the error](#clearing-the-error)
     * [Knowing whether the validation passed](#knowing-whether-the-validation-passed)
-    
+
   * [Validation rules](#validation-rules)
-  
+
     * [Built-in rules](#built-in-rules)
-  
       * [Alphanumeric](#alphanumeric)
       * [Boolean](#boolean)
       * [Date](#date)
@@ -52,10 +49,8 @@ Brought to you by the fine folks at [KRDS](http://www.krds.com/).
       * [LowerThan](#lowerthan)
       * [NotEmpty](#notempty)
       * [Required](#required)
-      * [Unchanged](#unchanged)
-      
+      * [Unchanged](#unchanged)<br><br>
     * [Custom rules](#custom-rules)
-    
       * [Closure](#closure)
       * [Custom function](#custom-function)
       * [PHP function](#php-function)
