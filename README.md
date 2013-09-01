@@ -12,16 +12,18 @@ Brought to you by the fine folks at [KRDS](http://www.krds.com/).
   
     * [Setting validation rules](#setting-validation-rules)
     
-    * [For a single field](#for-a-single-field)
-    * [For multiple fields](#for-multiple-fields)
+      * [For a single field](#for-a-single-field)
+      * [For multiple fields](#for-multiple-fields)
     
-      * ['and' rule](#and-rule)
-      * ['or' rule](#or-rule)
-      * [Break](#break)
+        * ['and' rule](#and-rule)
+        * ['or' rule](#or-rule)
+        * [Break](#break)
     
     * [Running the validation](#running-the-validation)
     * [Pushing errors manually](#pushing-errors-manually)
     * [Full example](#full-example)
+    
+  * [Localization](#localization)
     
   * [Field related functions](#field-related-functions)
   
@@ -72,6 +74,8 @@ $validator = new Validator;
 ```
 
 The methods below can be chained to `$validator`.
+
+To set the locale of error messages:
 
 ### Setting validation rules
 
@@ -204,6 +208,21 @@ $validator->ruleuntilbreak(new \Validation\Required)
 if( ! $validator->run($_POST))
   print_r($validator->getErrors());
 ```
+
+## Localization
+
+Language files are located in lang/ folder. To choose a language for error messages:
+
+```php
+\Validation\i18n::setLanguage($language);
+```
+
+
+The following languages are currently supported:
+
+  * **en**: English (default)
+  * **fr**: French
+
 
 ## Field related functions
 
