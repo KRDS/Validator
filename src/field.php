@@ -76,7 +76,7 @@ class Field
 				$rule_type		=	self::_getRuleType($rule);
 				$display_error	=	$rule_type === self::RULE_BUILTIN ? $rule->displayError() : true;
 
-				if($value !== null || ! empty($rule->accept_missing_value))
+				if($value !== null || ($rule_type === self::RULE_BUILTIN && ! empty($rule->accept_missing_value)))
 				{
 					try
 					{
