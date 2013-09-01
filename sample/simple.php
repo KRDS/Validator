@@ -21,10 +21,10 @@ $data	=	[
 $validator	=	new Validator;
 
 $validator->field('firstname')
-			->rule(new \Validation\Required)
+			->rule(new \Validation\NotEmpty)
 
 		->field('lastname')
-			->rule(new \Validation\Required)
+			->rule(new \Validation\NotEmpty)
 
 		->field('email')
 			->rule(new \Validation\Required)
