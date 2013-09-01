@@ -15,7 +15,6 @@ class Validator
 	protected $_has_run	=	false;
 
 	protected $_values;
-
 	protected $_current_field;
 	protected $_fields	=	[ ];
 

@@ -215,7 +215,7 @@ class Field
 		}
 		else
 		{
-			if($rule instanceof \Validation_Abstract)
+			if($rule instanceof \Validator\Validation_Abstract)
 				$ret	=	self::RULE_BUILTIN;
 			else if(is_callable($rule))
 				$ret	=	self::RULE_CLOSURE;
