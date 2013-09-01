@@ -63,7 +63,7 @@ $validator->ruleuntilbreak(new \Validation\Required())
 			->field('age')
 			->rule('ctype_digit')
 
-		->breakRules()
+		->breakRule()
 
 		->ruleuntilbreak(new \Validation\Required, Validator::OPERATOR_OR, 'Please indicate your phone number')
 
@@ -71,7 +71,6 @@ $validator->ruleuntilbreak(new \Validation\Required())
 			->field('mobile_number')
 
 		->breakRule();
-
 
 if( ! $validator->run($data))
 	print_r($validator->getErrors());

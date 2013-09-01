@@ -96,7 +96,7 @@ $validator->rule(new \Validation\Required);
 A single rule can be applied to multiple fields.<br>
 It is useful to avoid repeating the same rule, for example in the case of several fields are required.
 
-These “global rules” are applied to each field until calling `breakRule` or `breakRules` functions.<br>
+These “global rules” are applied to each field until calling `breakRule` (latest only) or `breakAllRules` (all) functions.<br>
 
 There are two type of rules: 'and' and 'or'.
 
@@ -131,7 +131,7 @@ $validator->breakRule();
 To break all global rules declared till now:
 
 ```php
-$validator->breakRules();
+$validator->breakAllRules();
 ```
 
 
@@ -190,7 +190,7 @@ $validator->ruleuntilbreak(new \Validation\Required)
           ->field('dob')
           ->rule(new \Validation\Dob)
 
-          ->breakRules();
+          ->breakAllRules();
 
 if( ! $validator->run($_POST))
   print_r($validator->getErrors());
