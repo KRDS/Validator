@@ -22,7 +22,7 @@ abstract class Validation_Abstract
 	protected $_validator;
 	protected $_display_error	=	true;
 
-	public function setValidator(Validator $validator)
+	public function setValidator(\Validator $validator)
 	{
 		$this->_validator	=	$validator;
 	}
