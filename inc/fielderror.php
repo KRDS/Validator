@@ -1,9 +1,11 @@
 <?php
 
+namespace Validator;
+
 /**
  * Describes an error in a field.
  */
-class Validator_FieldError
+class FieldError
 {
 	protected $_message;
 	protected $_display_error;

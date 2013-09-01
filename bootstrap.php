@@ -1,8 +1,9 @@
 <?php
 
 require __DIR__.'/validator.php';
-require __DIR__.'/inc/validator_field.php';
-require __DIR__.'/inc/validator_fielderror.php';
+require __DIR__.'/inc/field.php';
+require __DIR__.'/inc/fielderror.php';
+require __DIR__.'/inc/locale.php';
 
 spl_autoload_register(function($function)
 {

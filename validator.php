@@ -40,7 +40,7 @@ class Validator
 		$this->_current_field	=	$field;
 
 		if( ! isset($this->_fields[$field]))
-			$this->_fields[$field]	=	new Validator_Field($field, $this);
+			$this->_fields[$field]	=	new \Validator\Field($field, $this);
 
 		// Initializes it with global 'and' rules
 		if($this->_temp_and)
@@ -57,7 +57,7 @@ class Validator
 	 * @method $this rule(mixed $rule) Add a rule to the field
 	 * @method $this ruleBefore(mixed $rule) Add a rule to the field at the top of the validation stack
 	 * @method $this rules(array $rules) Add multiple rules to the field
-	 * @method $this getError() Return the error as a `Validator_FieldError` object
+	 * @method $this getError() Return the error as a `\Validator\FieldError` object
 	 */
 	public function __call($name, $arguments)
 	{
@@ -219,7 +219,7 @@ class Validator
 
 			foreach($or['fields'] as $field)
 			{
-				$value		=	Validator_Field::getValue($field, $values);
+				$value		=	\Validator\Field::getValue($field, $values);
 
 				if($value !== null || ! empty($or['rule']->accept_missing_value))
 				{

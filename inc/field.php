@@ -1,13 +1,15 @@
 <?php
 
 /**
- * Describesa single field with its validation rules.
+ * Describes a single field with its validation rules.
  *
  * @param string $name Name of the field
  * @param Validator $validator Validator for which the field is instantiated
  */
 
-class Validator_Field
+namespace Validator;
+
+class Field
 {
 	const RULE_BUILTIN	=	'builtin'
 		, RULE_CLOSURE	=	'closure'
@@ -21,7 +23,7 @@ class Validator_Field
 	protected $_error;
 	protected $_error_forced	=	false;
 
-	public function __construct($name, Validator $validator)
+	public function __construct($name, \Validator $validator)
 	{
 		$this->_name		=	$name;
 		$this->_validator	=	$validator;
@@ -104,12 +106,12 @@ class Validator_Field
 
 							case self::RULE_PHP:
 								if( ! call_user_func($rule, $value))
-									throw new Exception(Lib::i18n()->error_validation_generic);
+									throw new \Exception(\Validator\Locale::get('error_validation_generic'));
 							break;
 						}
 
 					}
-					catch(Exception $e)
+					catch(\Exception $e)
 					{
 						if($display_error)
 						{
@@ -143,7 +145,7 @@ class Validator_Field
 	/**
 	 * Return the first error for the field.
 	 *
-	 * @return Validator_FieldError
+	 * @return \Validator\FieldError
 	 */
 	public function getError()
 	{
@@ -158,7 +160,7 @@ class Validator_Field
 	 */
 	public function error($message, $display_error = true, $forced = false)
 	{
-		$this->_error			=	new Validator_FieldError($message, $display_error);
+		$this->_error			=	new \Validator\FieldError($message, $display_error);
 		$this->_error_forced	=	$forced;
 
 		$this->_validator->setHasError(true);
@@ -213,12 +215,12 @@ class Validator_Field
 		}
 		else
 		{
-			if($rule instanceof Validation_Abstract)
+			if($rule instanceof \Validation_Abstract)
 				$ret	=	self::RULE_BUILTIN;
 			else if(is_callable($rule))
 				$ret	=	self::RULE_CLOSURE;
 			else
-				throw new Exception('Wrong rule type. Unable to run the validation.');
+				throw new \Exception('Wrong rule type. Unable to run the validation.');
 		}
 
 		return $ret;
