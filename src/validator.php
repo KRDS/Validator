@@ -53,6 +53,8 @@ class Validator
 	}
 
 	/**
+	 * Forward function calls to the current \Validator\Field object.
+	 *
 	 * @method $this rule(mixed $rule) Add a rule to the field
 	 * @method $this ruleBefore(mixed $rule) Add a rule to the field at the top of the validation stack
 	 * @method $this rules(array $rules) Add multiple rules to the field
@@ -210,7 +212,7 @@ class Validator
 
 		$this->_has_error	=	false;
 
-		// Process 'or' errors
+		// First, run all 'or' validation rules
 		foreach($this->_or as $or)
 		{
 			$has_check		=	false;
@@ -233,7 +235,7 @@ class Validator
 				$this->globalError($or['message']);
 		}
 
-		// Process each field
+		// Then, run the other rules for each field
 		foreach($this->_fields as $field)
 			$field->run($values);
 
@@ -241,7 +243,7 @@ class Validator
 	}
 
 	/**
-	 * An OK field is not empty and has passed the validation
+	 * An OK field is not empty and has passed the validation.
 	 *
 	 * @param string $field Field name
 	 * @return bool
@@ -282,7 +284,7 @@ class Validator
 	/**
 	 * Return the error messages after the validation has been run.
 	 *
-	 * @param bool $displayable Whether to display non-displayable messages (for example, `DependsOn error)
+	 * @param bool $displayable Whether to display non-displayable messages (for example, `DependsOn` error)
 	 * @return array List of field names with their error message. Empty array if no error
 	 */
 	public function getErrors($displayable = false)
@@ -302,7 +304,7 @@ class Validator
 	}
 
 	/**
-	 * Set whether the validation passed or nt.
+	 * Set whether the validation passed or not.
 	 *
 	 * @param bool $has_error
 	 */

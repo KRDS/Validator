@@ -21,5 +21,4 @@ return [
 	'error_required' => 'Ce champ est obligatoire',
 	'error_generic' => 'Veuillez vérifier ce champ',
 	'error_length_lower_than' => 'Ce champ doit contenir moins de %max caractères',
-
 ];
