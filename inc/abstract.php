@@ -7,6 +7,8 @@
  * @param Validator $validator
  */
 
+namespace Validator;
+
 abstract class Validation_Abstract
 {
 	/**

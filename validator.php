@@ -85,7 +85,7 @@ class Validator
 	 *   - An 'and' rule is applied to each field added after declaring it.
 	 *
 	 *   - An 'or' rule will pass if at least one of the fields added after declaring it passes it.<br>
-	 *     It is typically used with `Validation_Required`, when at least one of X fields must be filled
+	 *     It is typically used with `\Validation\Required`, when at least one of X fields must be filled
 	 *	   (for example, at least the user landline or mobile phone number).
 	 *
 	 * @param mixed $rule Validation rule

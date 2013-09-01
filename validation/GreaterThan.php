@@ -5,10 +5,12 @@
  * Can validate numbers or dates.
  *
  * @param int $min Number that should be the lowest
- * @param array $type `Validation_GreaterThan::TYPE_DATE` to compare dates
+ * @param array $type `\Validation\GreaterThan::TYPE_DATE` to compare dates
  */
 
-class Validation_GreaterThan extends Validation_Abstract
+namespace Validation;
+
+class GreaterThan extends \Validator\Validation_Abstract
 {
 	const TYPE_NUMBER	=	'number'
 		, TYPE_DATE		=	'date';
@@ -24,13 +26,13 @@ class Validation_GreaterThan extends Validation_Abstract
 
 	/**
 	 * @param int|string $value Digit or date in YYYY-MM-DD format
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function check($value)
 	{
 		if($this->_type === self::TYPE_NUMBER && $value < $this->_min)
-			throw new Exception(\Validator\i18n::get('error_validation_greater_than', $this->_min));
+			throw new \Exception(\Validator\i18n::get('error_validation_greater_than', $this->_min));
 		else if($this->_type === self::TYPE_DATE && strtotime($value) < $this->_min)
-			throw new Exception(\Validator\i18n::get('error_validation_greater_than_date', Library_Utils::formatDate($this->_min)));
+			throw new \Exception(\Validator\i18n::get('error_validation_greater_than_date', Library_Utils::formatDate($this->_min)));
 	}
 }

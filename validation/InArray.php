@@ -7,7 +7,9 @@
  * @param bool $ignore_case If true, the case will be ignored for searching through the array
  */
 
-class Validation_InArray extends Validation_Abstract
+namespace Validation;
+
+class InArray extends \Validator\Validation_Abstract
 {
 	protected $_list;
 	protected $_ignore_case;
@@ -23,6 +25,6 @@ class Validation_InArray extends Validation_Abstract
 			$value	=	strtolower($value);
 
 		if( ! in_array($value, $this->_list))
-			throw new Exception(\Validator\i18n::get('error_validation_in_array'));
+			throw new \Exception(\Validator\i18n::get('error_validation_in_array'));
 	}
 }

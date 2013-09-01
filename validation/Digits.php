@@ -5,7 +5,9 @@
  * Can be either of type `string` or `int`.
  */
 
-class Validation_Digits extends Validation_Abstract
+namespace Validation;
+
+class Digits extends \Validator\Validation_Abstract
 {
 	public function check($value)
 	{
@@ -13,6 +15,6 @@ class Validation_Digits extends Validation_Abstract
 						|| is_int($value);
 
 		if( ! $is_digits)
-			throw new Exception(\Validator\i18n::get('error_validation_digits'));
+			throw new \Exception(\Validator\i18n::get('error_validation_digits'));
 	}
 }

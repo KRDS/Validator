@@ -4,7 +4,9 @@
  * Validates a date + hour in YYYY-MM-DD HH:MM format.
  */
 
-class Validation_DateHour extends Validation_Abstract
+namespace Validation;
+
+class DateHour extends \Validator\Validation_Abstract
 {
 	public function check($value)
 	{
@@ -12,6 +14,6 @@ class Validation_DateHour extends Validation_Abstract
 		$pattern	.=	' (?P<hour>[01]?[0-9]|2[0-3]):(?P<min>[0-5][0-9])$#';
 
 		if( ! preg_match($pattern, $value, $parts) || ! checkdate($parts['month'], $parts['day'], $parts['year']))
-			throw new Exception(\Validator\i18n::get('error_validation_date'));
+			throw new \Exception(\Validator\i18n::get('error_validation_date'));
 	}
 }

@@ -28,9 +28,9 @@ class User
 
 $validator	=	new Validator;
 
-$validator->ruleuntilbreak(new Validation_Required)
+$validator->ruleuntilbreak(new \Validation\Required())
 
-			->ruleuntilbreak(new Validation_LengthGreaterThan(3))
+			->ruleuntilbreak(new \Validation\LengthGreaterThan(3))
 
 				->field('firstname')
 
@@ -42,10 +42,10 @@ $validator->ruleuntilbreak(new Validation_Required)
 			->breakRule()
 
 			->field('email')
-			->rule(new Validation_Email)
+			->rule(new \Validation\Email)
 
 			->field('dob')
-			->rule(new Validation_Date)
+			->rule(new \Validation\Date)
 
 			->field('agreement')
 			->rule(function($value)
@@ -59,7 +59,7 @@ $validator->ruleuntilbreak(new Validation_Required)
 
 		->breakRules()
 
-		->ruleuntilbreak(new Validation_Required, Validator::OPERATOR_OR, 'Please indicate your phone number')
+		->ruleuntilbreak(new \Validation\Required, Validator::OPERATOR_OR, 'Please indicate your phone number')
 
 			->field('landline_number')
 			->field('mobile_number')

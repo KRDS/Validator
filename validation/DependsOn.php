@@ -10,7 +10,9 @@
  * @param string $field Name of the field it depends on
  */
 
-class Validation_DependsOn extends Validation_Abstract
+namespace Validation;
+
+class DependsOn extends \Validator\Validation_Abstract
 {
 	protected $_field;
 
@@ -21,26 +23,24 @@ class Validation_DependsOn extends Validation_Abstract
 
 	public function check($value, $values, $validator)
 	{
-		$value; // Unused
-
 		$is_empty			=	false;
-		$validator_required	=	new Validation_Required();
+		$validator_required	=	new \Validation\Required();
 
 		try
 		{
 			if( ! array_key_exists($this->_field, $values))
-				throw new Exception('Unknown key');
+				throw new \Exception('Unknown key');
 
 			$validator_required->check($values[$this->_field]);
 		}
-		catch(Exception $e)
+		catch(\Exception $e)
 		{
 			$is_empty	=	true;
 		}
 
 		if($is_empty)
-			throw new Exception(\Validator\i18n::get('error_validation_depends_on_empty', $this->_field));
+			throw new \Exception(\Validator\i18n::get('error_validation_depends_on_empty', $this->_field));
 		else if($validator->getField($this->_field)->hasError())
-			throw new Exception(\Validator\i18n::get('error_validation_depends_on_check', $this->_field));
+			throw new \Exception(\Validator\i18n::get('error_validation_depends_on_check', $this->_field));
 	}
 }

@@ -1,13 +1,14 @@
 <?php
 
 require __DIR__.'/validator.php';
+require __DIR__.'/inc/abstract.php';
 require __DIR__.'/inc/field.php';
 require __DIR__.'/inc/fielderror.php';
-require __DIR__.'/inc/locale.php';
+require __DIR__.'/inc/i18n.php';
 
 spl_autoload_register(function($function)
 {
-	if(substr($function, 0, 11) === 'Validation_')
+	if(substr($function, 0, 11) === 'Validation\\')
 	{
 		$name	=	substr($function, 11);
 
