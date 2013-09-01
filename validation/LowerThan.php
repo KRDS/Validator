@@ -39,7 +39,7 @@ class LowerThan extends \Validator\Validation_Abstract
 		else if($this->_type === self::TYPE_DATE && strtotime($value) > $this->_max)
 		{
 			throw new \Exception(\Validator\i18n::get('error_validation_lower_than_date', [
-				'date' => Library_Utils::formatDate($this->_max),
+				'date' => date('Y-m-d', $this->_max),
 			]));
 		}
 	}
