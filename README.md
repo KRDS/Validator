@@ -112,7 +112,7 @@ There are two type of rules: 'and' and 'or'.
 
 An 'and' rule is applied to each field added after declaring it.
 
-```
+```php
 $validator->ruleUntilBreak($rule);
 ```
 
@@ -121,7 +121,7 @@ $validator->ruleUntilBreak($rule);
 An 'or' rule will pass if at least one of the fields added after declaring it passes it.<br>
 It is typically used with `\Validation\Required`, when at least one of X fields must be filled (for example, at least the user landline or mobile phone number).
 
-```
+```php
 $validator->ruleUntilBreak($rule, Validator::OPERATOR_OR, $message);
 ```
 
@@ -132,13 +132,13 @@ $validator->ruleUntilBreak($rule, Validator::OPERATOR_OR, $message);
 
 To break the latest global rule declared:
 
-```
+```php
 $validator->breakRule();
 ```
 
 To break all global rules declared till now:
 
-```
+```php
 $validator->breakRules();
 ```
 
