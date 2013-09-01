@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This sample file showcases all the features of Validator.
+ * This sample file showcases most of the features of Validator.
  */
 
 require_once __DIR__.'/../bootstrap.php';
@@ -34,43 +34,46 @@ class User
 
 $validator	=	new Validator;
 
-$validator->globalRule(new \Validation\Required())
+$validator
+		->globalRule(new \Validation\Required())
 
-				->globalRule(new \Validation\LengthGreaterThan(3))
+			->globalRule(new \Validation\LengthGreaterThan(3))
 
-					->field('firstname')
+				->field('firstname')
+				->field('lastname')
 
-					->field('lastname')
-
-					->field('username')
+				->field('username')
 					->rule('User::isUsernameTaken')
 
-				->endGlobalRule()
+			->endGlobalRule()
 
-				->field('email')
+			->field('email')
 				->rule(new \Validation\Email)
 
-				->field('dob')
+			->field('dob')
 				->rule(new \Validation\Date)
 
-				->field('agreement')
+			->field('agreement')
 				->rule(function($value)
 				{
 					if($value !== 'I AGREE')
 						throw new Exception('Please write “I AGREE” if you agree with the rules');
 				})
 
-				->field('age')
+			->field('age')
 				->rule('ctype_digit')
 
 		->endGlobalRule()
 
 		->globalRule(new \Validation\Required, Validator::OPERATOR_OR, 'Please indicate your phone number')
-
 			->field('landline_number')
 			->field('mobile_number')
+		->endGlobalRule()
+						
+		->field('fake')
+			->error('This is a forced error message')
 
-		->endGlobalRule();
+		->globalError('And this is a forced global error message');
 
 if( ! $validator->run($data))
 	print_r($validator->getErrors());

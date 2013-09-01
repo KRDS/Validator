@@ -20,7 +20,8 @@ $data	=	[
 
 $validator	=	new Validator;
 
-$validator->field('firstname')
+$validator
+		->field('firstname')
 			->rule(new \Validation\NotEmpty)
 
 		->field('lastname')
