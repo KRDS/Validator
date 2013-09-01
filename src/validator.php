@@ -22,11 +22,14 @@ class Validator
 	protected $_global_errors	=	[ ];
 
 	// Hold temporary 'and' and 'or' rules
-	protected $_temp_and	=	[ ];
-	protected $_temp_or		=	[ ];
+	protected $_temp_or			=	[ ];
+	protected $_temp_and		=	[ ];
 
 	// Hold final 'or' rules
 	protected $_or	=	[ ];
+
+	// Hold the stack of 'and' and 'or' to break in the right order
+	private $__and_or_stack	=	[ ];
 
 	/**
 	 * Declare a field
@@ -64,7 +67,7 @@ class Validator
 		try
 		{
 			if( ! $this->_current_field)
-				throw new Exception('Please declare a field before calling '.$name.', or use `ruleUntilBreak`', E_ERROR);
+				throw new Exception('Please declare a field before calling '.$name.', or use `globalRule`', E_ERROR);
 
 			$field	=	$this->_fields[$this->_current_field];
 
@@ -80,7 +83,7 @@ class Validator
 
 	/**
 	 * Declare a global rule to be applied to multiple field.
-	 * A global rule is disabled with `breakRule` function.
+	 * A global rule is disabled with `endGlobalRule` function.
 	 *
 	 *   - An 'and' rule is applied to each field added after declaring it.
 	 *
@@ -93,8 +96,10 @@ class Validator
 	 * @param string $message Error message (in the case of 'or' rule)
 	 * @return \Validator
 	 */
-	public function ruleUntilBreak($rule, $operator = self::OPERATOR_AND, $message = null)
+	public function globalRule($rule, $operator = self::OPERATOR_AND, $message = null)
 	{
+		$this->__and_or_stack[]	=	$operator;
+
 		switch($operator)
 		{
 			case self::OPERATOR_AND:
@@ -115,24 +120,44 @@ class Validator
 				];
 
 			break;
+
+			default:
+
+				throw new Exception('Unknown operator \''.$operator.'\' for global rule');
 		}
 
 		return $this;
 	}
 
 	/**
-	 * Break the latest global rule declared.
+	 * Disable the latest global rule declared.
 	 *
 	 * @return \Validator
 	 */
-	public function breakRule()
+	public function endGlobalRule()
 	{
-		// Merge temporary 'or' rules
-		if($this->_temp_or)
-			$this->_or[]	=	array_pop($this->_temp_or);
+		switch(array_pop($this->__and_or_stack))
+		{
+			case self::OPERATOR_AND:
 
-		// Remove latest pushed 'and' rule
-		array_pop($this->_temp_and);
+				// Remove latest pushed 'and' rule
+				array_pop($this->_temp_and);
+
+			break;
+
+			case self::OPERATOR_OR:
+
+				// Merge temporary 'or' rules
+				if($this->_temp_or)
+					$this->_or[]	=	array_pop($this->_temp_or);
+
+			break;
+
+			default:
+
+				// No more rule in the stack
+				throw new Exception('Called `endGlobalRule` when no global rule remaining');
+		}
 
 		return $this;
 	}
@@ -194,7 +219,7 @@ class Validator
 
 		$this->_has_error	=	false;
 
-		$this->_breakAllRules();
+		$this->_endAllGlobalRules();
 
 		// First, run all 'or' validation rules
 		foreach($this->_or as $or)
@@ -298,11 +323,11 @@ class Validator
 	}
 
 	/**
-	 * Break all global rules declared till now.
+	 * Close and disable all the remaining global rules.
 	 *
 	 * @return \Validator
 	 */
-	protected function _breakAllRules()
+	protected function _endAllGlobalRules()
 	{
 		// Merge temporary 'or' rules
 		if($this->_temp_or)

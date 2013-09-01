@@ -93,19 +93,20 @@ $validator->rule(new \Validation\Required);
 
 #### For multiple fields
 
-A single rule can be applied to multiple fields.<br>
+A same rule can be applied to multiple fields. It is called a **global rule**.<br>
 It is useful to avoid repeating the same rule, for example in the case of several fields are required.
 
-These “global rules” are applied to each field until calling `breakRule` function.<br>
+A global rule will be applied to each field until calling `endGlobalRule` function.<br>
 
 There are two type of rules: 'and' and 'or'.
 
 ##### 'and' rule
 
-An 'and' rule is applied to each field added after declaring it.
+An 'and' rule is applied to each field added after declaring it.<br>
+It is the default type of rule.
 
 ```php
-$validator->ruleUntilBreak($rule);
+$validator->globalRule($rule);
 ```
 
 ##### 'or' rule
@@ -114,7 +115,7 @@ An 'or' rule will pass if at least one of the fields added after declaring it pa
 It is typically used with `\Validation\Required`, when at least one of X fields must be filled (for example, at least the user landline or mobile phone number).
 
 ```php
-$validator->ruleUntilBreak($rule, Validator::OPERATOR_OR, $message);
+$validator->globalRule($rule, Validator::OPERATOR_OR, $message);
 ```
 
 `$message` is a required property. It is the user-facing message that will be returned if none of the fields pass the rule.
@@ -122,10 +123,10 @@ $validator->ruleUntilBreak($rule, Validator::OPERATOR_OR, $message);
 
 ##### Break
 
-To break the latest global rule declared:
+To end the latest global rule declared:
 
 ```php
-$validator->breakRule();
+$validator->endGlobalRule();
 ```
 
 ### Running the validation
@@ -170,12 +171,12 @@ The following examples validates a simple user information form.
 ```php
 $validator = new Validator;
 
-$validator->ruleuntilbreak(new \Validation\Required)
+$validator->globalRule(new \Validation\Required)
 
-              ->ruleuntilbreak(new \Validation\LengthGreaterThan(3))
+              ->globalRule(new \Validation\LengthGreaterThan(3))
                   ->field('firstname')
                   ->field('lastname')
-              ->breakRule()
+              ->endGlobalRule()
 
               ->field('email')
                   ->rule(new \Validation\Email)
@@ -183,7 +184,7 @@ $validator->ruleuntilbreak(new \Validation\Required)
               ->field('dob')
                   ->rule(new \Validation\Dob)
 
-          ->breakRule();
+          ->endGlobalRule();
 
 if( ! $validator->run($_POST))
   print_r($validator->getErrors());

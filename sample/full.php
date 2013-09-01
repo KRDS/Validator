@@ -34,43 +34,43 @@ class User
 
 $validator	=	new Validator;
 
-$validator->ruleuntilbreak(new \Validation\Required())
+$validator->globalRule(new \Validation\Required())
 
-			->ruleuntilbreak(new \Validation\LengthGreaterThan(3))
+				->globalRule(new \Validation\LengthGreaterThan(3))
 
-				->field('firstname')
+					->field('firstname')
 
-				->field('lastname')
+					->field('lastname')
 
-				->field('username')
-				->rule('User::isUsernameTaken')
+					->field('username')
+					->rule('User::isUsernameTaken')
 
-			->breakRule()
+				->endGlobalRule()
 
-			->field('email')
-			->rule(new \Validation\Email)
+				->field('email')
+				->rule(new \Validation\Email)
 
-			->field('dob')
-			->rule(new \Validation\Date)
+				->field('dob')
+				->rule(new \Validation\Date)
 
-			->field('agreement')
-			->rule(function($value)
-			{
-				if($value !== 'I AGREE')
-					throw new Exception('Please write “I AGREE” if you agree with the rules');
-			})
+				->field('agreement')
+				->rule(function($value)
+				{
+					if($value !== 'I AGREE')
+						throw new Exception('Please write “I AGREE” if you agree with the rules');
+				})
 
-			->field('age')
-			->rule('ctype_digit')
+				->field('age')
+				->rule('ctype_digit')
 
-		->breakRule()
+		->endGlobalRule()
 
-		->ruleuntilbreak(new \Validation\Required, Validator::OPERATOR_OR, 'Please indicate your phone number')
+		->globalRule(new \Validation\Required, Validator::OPERATOR_OR, 'Please indicate your phone number')
 
 			->field('landline_number')
 			->field('mobile_number')
 
-		->breakRule();
+		->endGlobalRule();
 
 if( ! $validator->run($data))
 	print_r($validator->getErrors());
