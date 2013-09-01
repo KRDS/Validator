@@ -200,6 +200,8 @@ class Validator
 	{
 		$this->_global_errors[]	=	$message;
 
+		$this->setHasError(true);
+		
 		return $this;
 	}
 
