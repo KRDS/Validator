@@ -80,7 +80,7 @@ class Validator
 
 	/**
 	 * Declare a global rule to be applied to multiple field.
-	 * A global rule is disabled with `breakRule` and `breakAllRules` functions.
+	 * A global rule is disabled with `breakRule` function.
 	 *
 	 *   - An 'and' rule is applied to each field added after declaring it.
 	 *
@@ -133,23 +133,6 @@ class Validator
 
 		// Remove latest pushed 'and' rule
 		array_pop($this->_temp_and);
-
-		return $this;
-	}
-
-	/**
-	 * Break all global rules declared till now.
-	 *
-	 * @return \Validator
-	 */
-	public function breakAllRules()
-	{
-		// Merge temporary 'or' rules
-		if($this->_temp_or)
-			$this->_or	=	array_merge($this->_or, $this->_temp_or);
-
-		$this->_temp_and	=	[ ];
-		$this->_temp_or		=	[ ];
 
 		return $this;
 	}
@@ -211,7 +194,7 @@ class Validator
 
 		$this->_has_error	=	false;
 
-		$this->breakAllRules();
+		$this->_breakAllRules();
 
 		// First, run all 'or' validation rules
 		foreach($this->_or as $or)
@@ -313,6 +296,22 @@ class Validator
 	{
 		$this->_has_error	=	$has_error;
 	}
+
+	/**
+	 * Break all global rules declared till now.
+	 *
+	 * @return \Validator
+	 */
+	protected function _breakAllRules()
+	{
+		// Merge temporary 'or' rules
+		if($this->_temp_or)
+			$this->_or	=	array_merge($this->_or, $this->_temp_or);
+
+		$this->_temp_and	=	[ ];
+		$this->_temp_or		=	[ ];
+	}
+
 
 	/**
 	 * Checks if a field has been declared when instantiating the function.
