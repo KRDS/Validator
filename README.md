@@ -34,23 +34,23 @@ Brought to you by the fine folks at [KRDS](http://www.krds.com/).
   
     * [Built-in rules](#built-in-rules)
   
-      * [Validation_Alphanumeric](#validation_alphanumeric)
-      * [Validation_Boolean](#validation_boolean)
-      * [Validation_Date](#validation_date)
-      * [Validation_DateHour](#validation_datehour)
-      * [Validation_DependsOn](#validation_dependson)
-      * [Validation_Digits](#validation_digits)
-      * [Validation_Email](#validation_email)
-      * [Validation_Empty](#validation_empty)
-      * [Validation_Float](#validation_float)
-      * [Validation_GreaterThan](#validation_greaterthan)
-      * [Validation_InArray](#validation_inarray)
-      * [Validation_LengthGreaterThan](#validation_lenghtgreaterthan)
-      * [Validation_LengthLowerThan](#validation_lengthlowerthan)
-      * [Validation_LowerThan](#validation_lowerthan)
-      * [Validation_NotEmpty](#validation_notempty)
-      * [Validation_Required](#validation_required)
-      * [Validation_Unchanged](#validation_unchanged)
+      * [Alphanumeric](#alphanumeric)
+      * [Boolean](#boolean)
+      * [Date](#date)
+      * [DateHour](#datehour)
+      * [DependsOn](#dependson)
+      * [Digits](#digits)
+      * [Email](#email)
+      * [Float](#float)
+      * [GreaterThan](#greaterthan)
+      * [InArray](#inarray)
+      * [IsEmpty](#isempty)
+      * [LengthGreaterThan](#lenghtgreaterthan)
+      * [LengthLowerThan](#lengthlowerthan)
+      * [LowerThan](#lowerthan)
+      * [NotEmpty](#notempty)
+      * [Required](#required)
+      * [Unchanged](#unchanged)
       
     * [Custom rules](#custom-rules)
     
@@ -89,14 +89,14 @@ $validator->field('field_name');
   * Then, add one or more rules:
 
   ```php
-  $validator->rule(new Validation_Required);
-              ->rule(new Validation_Email);
+  $validator->rule(new \Validation\Required);
+              ->rule(new \Validation\Email);
   ```
 
   * Or prepend them (will be pushed at the top of the validation stack):
 
     ```php
-    $validator->ruleBefore(new Validation_Required);
+    $validator->ruleBefore(new \Validation\Required);
     ```
 
 
@@ -120,7 +120,7 @@ $validator->ruleUntilBreak($rule);
 ##### 'or' rule
 
 An 'or' rule will pass if at least one of the fields added after declaring it passes it.<br>
-It is typically used with `Validation_Required`, when at least one of X fields must be filled (for example, at least the user landline or mobile phone number).
+It is typically used with `\Validation\Required`, when at least one of X fields must be filled (for example, at least the user landline or mobile phone number).
 
 ```
 $validator->ruleUntilBreak($rule, Validator::OPERATOR_OR, $message);
@@ -186,18 +186,18 @@ The following examples validates a simple user information form.
 ```php
 $validator = new Validator;
 
-$validator->ruleuntilbreak(new Validation_Required)
+$validator->ruleuntilbreak(new \Validation\Required)
 
-          ->ruleuntilbreak(new Validation_LengthGreaterThan(3))
+          ->ruleuntilbreak(new \Validation\LengthGreaterThan(3))
           ->field('firstname')
           ->field('lastname')
           ->breakRule()
 
           ->field('email')
-          ->rule(new Validation_Email)
+          ->rule(new \Validation\Email)
 
           ->field('dob')
-          ->rule(new Validation_Dob)
+          ->rule(new \Validation\Dob)
 
           ->breakRules();
 
@@ -253,7 +253,6 @@ $validator->field('field_name')->ok();
 // return `true` if the field is NOT missing and the validation passed, `false` otherwise.
 ```
 
-
 ## Validation rules
 
 Validation rules are executed only if the field is present (that means, given on the array, it might be empty).
@@ -266,25 +265,25 @@ Validation rules are executed only if the field is present (that means, given on
 
 ### Built-in rules
 
-#### Validation_Alphanumeric
+#### Alphanumeric
 
 Validates an alphanumeric string.
 
-#### Validation_Boolean
+#### Boolean
 
 Validates a boolean value.
 
 Can be: `true` / `false` / 1 / 0 / "1" / "0" / ""
 
-#### Validation_Date
+#### Date
 
 Validates a date in YYYY-MM-DD HH:MM format.
 
-#### Validation_DateHour
+#### DateHour
 
 Validates a date + hour in YYYY-MM-DD HH:MM format.
 
-#### Validation_DependsOn
+#### DependsOn
 
 This validation rule has to be placed at the top of the rules declaration for a field.
 It will block the other validation rules in the stack if another field is missing of invalid.
@@ -293,106 +292,105 @@ This validation rule won’t generate an error message by default in case of fai
 It can be shown anyway if `$displayable` param of `Validator::run is set to `true`.
 
 ```php
-new Validation_DependsOn($field)
+new \Validation\DependsOn($field)
 ```
 
   * `$field` is the name of the field it depends on
 
-#### Validation_Digits
+#### Digits
 
 Validates a field made of digits only.
 
 Can be either of type `string` or `int`.
 
-#### Validation_Email
+#### Email
 
 Validates an email address.
 
-#### Validation_Empty
-
-Validates a required but empty field.
-
-#### Validation_Float
+#### Float
 
 Validates a float value.
 
 Can be either of type `string` or `int`.<br>
 The decimal separator can be either a point (.) or a comma (,).
 
-#### Validation_GreaterThan
+#### GreaterThan
 
 Validates a value greater than another value.
 Can validate numbers or dates.
 
 ```php
-new Validation_GreaterThan($number[, $type])
+new \Validation\GreaterThan($number[, $type])
 ```
 
    * `$number` is the number that should be the lowest
-   * `$type` can be set to `Validation_GreaterThan::TYPE_DATE` to compare dates
+   * `$type` can be set to `\Validation\GreaterThan::TYPE_DATE` to compare dates
 
-#### Validation_InArray
+#### InArray
 
 Validates a value part of a pre-defined list.
 
 ```php
-new Validation_InArray($list[, $ignore_case = false])
+new \Validation\InArray($list[, $ignore_case = false])
 ```
 
   * `$list`: List of values the validated value should belong to
   * `$ignore_case`: If true, the case will be ignored for searching through the array
 
+#### IsEmpty
 
-#### Validation_LengthGreaterThan
+Validates a required but empty field.
+
+#### LengthGreaterThan
 
 Validates a length greater than a given length.
 
 ```php
-new Validation_LengthGreaterThan($length)
+new \Validation\LengthGreaterThan($length)
 ```
 
   * `$length`: Length for which the field must be greater than.
   
 
-#### Validation_LengthLowerThan
+#### LengthLowerThan
 
 Validates a length lower than a given length.
 
 ```php
-new Validation_LengthLowerThan($length)
+new \Validation\LengthLowerThan($length)
 ```
 
   * `$length`: Length for which the field must be lower than.
 
 
-#### Validation_LowerThan
+#### LowerThan
 
 Validates a value lower than another value.
 Can validate numbers or dates.
 
 ```php
-new Validation_LowerThan($number[, $type = Validation_GreaterThan::TYPE_NUMBER])
+new \Validation\LowerThan($number[, $type = \Validation\GreaterThan::TYPE_NUMBER])
 ```
 
   * `$number` is the number that should be the greatest
-  * `$type` can be set to Validation_GreaterThan::TYPE_DATE` to compare dates
+  * `$type` can be set to \Validation\GreaterThan::TYPE_DATE` to compare dates
 
-#### Validation_NotEmpty
+#### NotEmpty
 
 Validates a required and non-empty field.
 
 
-#### Validation_Required
+#### Required
 
 Validates a required field.
 
 
-#### Validation_Unchanged
+#### Unchanged
 
 Validates that the value has not been changed.
 
 ```php
-new Validation_Unchanged($reference)
+new \Validation\Unchanged($reference)
 ```
 
   * `$reference` is the reference value to be checked against
