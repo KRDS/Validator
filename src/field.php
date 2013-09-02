@@ -19,14 +19,16 @@ class Field
 	protected $_name;
 	protected $_rules	=	[ ];
 	protected $_validator;
+	protected $_operator;
 
 	protected $_error;
 	protected $_error_forced	=	false;
 
-	public function __construct($name, \Validator $validator)
+	public function __construct($name, \Validator $validator, $operator)
 	{
 		$this->_name		=	$name;
 		$this->_validator	=	$validator;
+		$this->_operator	=	$operator;
 	}
 
 	/**
@@ -165,6 +167,16 @@ class Field
 		$this->_error_forced	=	false;
 	}
 
+	/**
+	 * Returns the operator the field belongs to.
+	 * 
+	 * @return $operator
+	 */
+	public function getOperator()
+	{
+		return $this->_operator;
+	}
+	
 	/**
 	 * Check if a key exists in a form and returns it.
 	 *
