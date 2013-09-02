@@ -41,8 +41,15 @@ class Validator
 	{
 		$this->_current_field	=	$field;
 
-		if( ! isset($this->_fields[$field]))
-			$this->_fields[$field]	=	new \Validator\Field($field, $this);
+		//Mark he field as belonging to a AND rule.
+		if(empty($this->__and_or_stack) || current($this->__and_or_stack) === self::OPERATOR_AND)
+			$operator	=	self::OPERATOR_AND;
+		else
+			$operator	=	self::OPERATOR_OR;
+
+		$field_validator		=	new \Validator\Field($field, $this, $operator);
+
+		$this->_fields[$field]	=	$field_validator;
 
 		// Initializes it with global 'and' rules
 		if($this->_temp_and)
@@ -246,9 +253,12 @@ class Validator
 				$this->globalError($or['message']);
 		}
 
-		// Then, run the other rules for each field
+		// Then, run the other rules for each field, but only if this field is part of a AND rule.
 		foreach($this->_fields as $field)
-			$field->run($values);
+		{
+			if($field->getOperator() === self::OPERATOR_AND)
+				$field->run($values);
+		}
 
 		return ! $this->_has_error;
 	}
