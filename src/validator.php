@@ -199,7 +199,8 @@ class Validator
 	public function globalError($message)
 	{
 		$this->_global_errors[]	=	$message;
-
+		$this->_has_error		=	true;
+		
 		return $this;
 	}
 
