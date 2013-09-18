@@ -21,4 +21,5 @@ return [
 	'error_required' => 'This field is required',
 	'error_generic' => 'Please check this field',
 	'error_length_lower_than' => 'This field should contain less than %max chars',
+	'error_unchanged' => 'This value cannot be changed',
 ];
