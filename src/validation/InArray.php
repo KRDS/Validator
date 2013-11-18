@@ -16,7 +16,8 @@ class InArray extends \Validator\Validation_Abstract
 
 	public function __construct(array $list, $ignore_case = false)
 	{
-		$this->_list	=	$ignore_case ? array_map('strtolower', $list) : $list;;
+		$this->_ignore_case	=	$ignore_case;
+		$this->_list		=	$ignore_case ? array_map('strtolower', $list) : $list;
 	}
 
 	public function check($value)
