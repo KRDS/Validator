@@ -196,9 +196,9 @@ class Validator
 	 * @param string $message Error message
 	 * @return \Validator
 	 */
-	public function globalError($message)
+	public function globalError($message, $field)
 	{
-		$this->_global_errors[]	=	$message;
+		$this->_global_errors[$field]	=	$message;
 		$this->_has_error		=	true;
 		
 		return $this;
@@ -242,7 +242,7 @@ class Validator
 			}
 
 			if($has_check && ! $has_success)
-				$this->globalError($or['message']);
+				$this->globalError($or['message'], current($or['fields']);
 		}
 
 		// Then, run the other rules for each field
